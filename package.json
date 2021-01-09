@@ -1,0 +1,35 @@
+{
+  "name": "shargs-example-sync-deepthought-config-env-argv",
+  "version": "1.0.0",
+  "description": "A sample application of shargs",
+  "keywords": [
+    "shargs",
+    "command-line",
+    "parser"
+  ],
+  "homepage": "https://github.com/Yord/shargs-example-sync-deepthought-config-env-argv",
+  "bugs": {
+    "url": "https://github.com/Yord/shargs/issues"
+  },
+  "license": "MIT",
+  "author": "Philipp Wille <philipp.y.wille@gmail.com> (https://github.com/Yord)",
+  "contributors": [
+    "Philipp Wille <philipp.y.wille@gmail.com> (https://github.com/Yord)"
+  ],
+  "main": "./deepThought",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Yord/shargs-example-sync-deepthought-config-env-argv.git"
+  },
+  "scripts": {
+    "start": "node ./deepThought"
+  },
+  "engines": {
+    "node": ">=8.3.0"
+  },
+  "private": true,
+  "dependencies": {
+    "ramda": "0.27.1",
+    "shargs": "1.0.0"
+  }
+}
