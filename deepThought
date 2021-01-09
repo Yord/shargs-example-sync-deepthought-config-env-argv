@@ -1,0 +1,42 @@
+#!/usr/bin/env node
+
+const R = require('ramda')
+
+const {environment}      = require('./opts/environment')
+const {deepThought, ask} = require('./opts/deepThought')
+
+const envParser  = require('./parser/env')
+const argvParser = require('./parser/argv')
+
+const parseEnv  = envParser(environment)
+const parseArgv = argvParser(deepThought)
+
+const config = require('./config.json')
+const env    = parseEnv(process.env)
+const argv   = parseArgv(process.argv.slice(2))
+
+const args = R.reduce(R.mergeDeepRight, config, [env.args, argv.args])
+const errs = [...env.errs, ...argv.errs]
+
+const {docs, askDocs, style} = require('./usage')
+
+if (args.help) {
+  const help = docs(deepThought)(style)
+  console.log(help)
+  process.exit(0)
+}
+
+if (args.ask && args.ask.help) {
+  const askHelp = askDocs(ask)(style)
+  console.log(askHelp)
+  process.exit(0)
+}
+
+if (errs.length > 0) {
+  errs.forEach(({code, msg}) => console.log(`${code}: ${msg}`))
+  process.exit(1)
+}
+
+console.log(`The answer is: ${args.answer}`)
+console.log(JSON.stringify(args, null, 2))
+process.exit(0)
